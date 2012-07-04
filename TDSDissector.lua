@@ -1,9 +1,26 @@
 -- works as of Wireshark Version 1.6.8 (lua 5.1) on Testing MacOSX
 -- author keijir
--- version 3
---  3 fix query packet
---  2 test add custom displayfilter
---  1 test add custom protocol
+-- version 4
+
+--Change History
+--  ver 4 2012/07/04 add 使い方
+--  ver 3 fix query packet
+--  ver 2 test add custom displayfilter
+--  ver 1 test add custom protocol
+
+--使い方
+-- (1)スクリプトファイルの設置
+--  C:\Program Files\Wireshark\へこのファイルを保存
+-- (2)Luaスクリプトの有効化
+--  (a) init.luaの２行を編集
+--    disable_lua = false
+--    run_user_scripts_when_superuser = true
+--  (b) init.luaの最後の行へ
+--    dofile("TDSDissector.lua")
+--  ※init.luaの場所
+--   Mac OSX /Applications/Wireshark.app/Contents/Resources/share/wireshark/init.lua
+--   Windows C:\Program Files\Wireshark\init.lua
+
 do
     --make Protocol
     custom_proto = Proto("tdscustom", "Tabular Data Stream Custom")
@@ -46,7 +63,7 @@ do
         local query_range = buffer(8,size-8)
       
         --make tree view
-        --add(proto( displayfiltername,text) , PacketBytePane_range , value ,text,�c )
+        --add(proto( displayfiltername,text) , PacketBytePane_range , value ,text,c )
         local subtree = tree:add(custom_proto,buffer(0,buffer:len())) --Tree name
         subtree:add(custom_proto.fields.type    , type_range    , ttype,"TYPE:",ttype,"=",type_names[ttype]):set_generated()
         subtree:add(custom_proto.fields.status  , status_range  , status):set_generated()
