@@ -3,6 +3,10 @@
   init.luaを編集
    disable_lua = false
    run_user_scripts_when_superuser = true
+   
+  init.luaの場所
+  Mac OSX /Applications/Wireshark.app/Contents/Resources/share/wireshark/init.lua
+  Windows C:\Program Files\Wireshark\init.lua
 
  作成したLuaスクリプトの読み込み
   init.lua最後へ追記
